@@ -21,11 +21,11 @@ export async function GET() {
 
 	try {
 		pgPool = new Pool({
-			host: 'ep-muddy-bonus-a145zz02-pooler.ap-southeast-1.aws.neon.tech',
-			port: 5432,
-			user: 'neondb_owner',
-			password: 'npg_CyZd5khmcUW9',
-			database: 'neondb',
+			host: process.env.DB_HOST,
+			port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
+			user: process.env.DB_USER,
+			password: process.env.DB_PASSWORD,
+			database: process.env.DB_NAME,
 			max: 5,
 			idleTimeoutMillis: 10_000,
 			ssl: {
