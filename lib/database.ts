@@ -23,7 +23,6 @@ export async function executeQuery(sqlQuery: string) {
 			max: 5,
 			idleTimeoutMillis: 10_000,
 			ssl: {
-				require: true,
 				rejectUnauthorized: false,
 			},
 		})

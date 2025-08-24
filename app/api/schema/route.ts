@@ -1,6 +1,21 @@
 import { NextResponse } from 'next/server'
 import { Pool } from 'pg'
 
+type TableSchema = {
+	schema: string
+	table: string
+	columns: Array<{
+		name: string
+		type: string
+		nullable: boolean
+		default: string | number | boolean | null
+		maxLength: number | null
+		precision: number | null
+		scale: number | null
+		constraints: string[]
+	}>
+}
+
 export async function GET() {
 	let pgPool: Pool | null = null
 
@@ -14,7 +29,6 @@ export async function GET() {
 			max: 5,
 			idleTimeoutMillis: 10_000,
 			ssl: {
-				require: true,
 				rejectUnauthorized: false,
 			},
 		})
@@ -54,7 +68,7 @@ export async function GET() {
 		const result = await pgPool.query(schemaQuery)
 
 		// Organize the results by table
-		const schema: Record<string, any> = {}
+		const schema: Record<string, TableSchema> = {}
 
 		result.rows.forEach(row => {
 			const {
@@ -81,7 +95,7 @@ export async function GET() {
 			}
 
 			if (column_name) {
-				const existingColumn = schema[tableKey].columns.find((col: any) => col.name === column_name)
+				const existingColumn = schema[tableKey].columns.find((col: TableSchema['columns'][0]) => col.name === column_name)
 
 				if (!existingColumn) {
 					schema[tableKey].columns.push({
