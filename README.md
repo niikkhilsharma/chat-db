@@ -1,1 +1,1 @@
-![Image](image.png)
+![Image](/public/docs/image.png)
