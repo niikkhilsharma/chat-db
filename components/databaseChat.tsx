@@ -109,7 +109,7 @@ export default function DatabaseChat() {
 					<div className="text-center text-gray-500 mt-8">
 						<p>Start by asking a question about your database!</p>
 						<p className="text-sm mt-2">
-							Examples: &quot;Show me all customers&quot;, &quot;What are the top 5 movies by rental count?&quot;
+							Examples: &quot;Show me all employees&quot;, &quot;What are the top 5 paid employees?&quot;
 						</p>
 					</div>
 				)}
